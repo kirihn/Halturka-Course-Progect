@@ -1,0 +1,1 @@
+docker run --name HalturkaPostgres -p 5432:5432 -e POSTGRES_USER=HaltAdmin -e POSTGRES_PASSWORD=HaltPass -e POSTGRES_DB=HalturkaDB -d postgres

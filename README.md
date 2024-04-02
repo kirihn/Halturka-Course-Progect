@@ -19,15 +19,14 @@ yarn add prisma --save-dev
 
 nest g resource auth --no-spec
 
+yarn add class-validator
+    yarn add class-transformer
 
+yarn add argon2
 
-
-
-
-
-
-
-
+yarn add @nestjs/config 
+    yarn add @nestjs/jwt
+    yarn add @nestjs/passport passport passport-jwt
 
 
 

@@ -13,12 +13,96 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+
 model User {
-  Id Int @id @default(autoincrement())
+  Id Int @id @default(autoincrement()) // Prim
+
   Password String
   Email String @unique
   Role Int
 
   CreatedAt DateTime @default(now()) @map("Created_At")
 }
+
+
+
+model Customer {
+  CustomerId Int @id @default(autoincrement()) @map("Customer_Id") // Prim
+
+  UserId Int @map("User_Id")// Forink
+
+  Name String 
+  PhoneNumber String @map("Phone_Number") 
+  AvatarPath String @default("/uploads/default-avatar.png") @map("Avatar_Path")
+}
+
+
+
+model HandyMan{
+  HandyManId Int @id @default(autoincrement()) @map("Handy_Man_Id") // Prim
+
+  UserId Int @map("User_Id")// Forink
+
+  Name String 
+  PhoneNumber String @map("Phone_Number")
+  AvatarPath String @default("/uploads/default-avatar.png") @map("Avatar_Path")
+}
+
+
+
+model Service{
+  ServiceId Int @id @default(autoincrement()) @map("Service_Id") // Prim
+
+  ServiceType String @map("Service_Type")
+  ServiceName String @map("Service_Name")
+}
+
+
+
+model ServiceHandyMan{
+  ServiceHandyManId Int @id @default(autoincrement()) @map("Service_Handy_Man_Id") // Prim
+
+  HandyManId Int @map("Handy_Man_Id") //forink
+  ServiceId Int @map("Service_Id") //forink
+
+  Message String
+  Price Decimal
+  TypePrice String @map("type_Price")
+  Images String[]
+}
+
+
+
+model Order {
+  OrderId Int @id @default(autoincrement()) @map("Order_Id") // Prim
+
+  CustomerId Int @map("Customer_Id") // Forink
+  HandyManId Int @map("Handy_Man_Id") // Forink
+  ServiceId Int @map("Service_Id") // Forink
+
+  Images String[]
+  Address String
+  Message String
+  Status String
+
+  Created_At DateTime @default(now()) @map("Created_At")
+  UpdatedAt DateTime @updatedAt @map("Updated_At")
+}
+
+
+
+model Feedback{
+  FeedbackId Int @id @default(autoincrement()) @map("Feedback_Id") // Prim
+
+  UserIdFrom Int @map("User_Id_From") // Forink
+  UserIdTo Int @map("User_Id_To") // Forink
+  OrderId Int @map("Order_Id") // Forink
+
+  Message String
+  Mark Int
+}
+
+
+
 

@@ -28,6 +28,7 @@ yarn add @nestjs/config
     yarn add @nestjs/jwt
     yarn add @nestjs/passport passport passport-jwt
 
+nest g resource user --no-spec
 
 
 

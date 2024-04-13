@@ -34,6 +34,44 @@ let AuthService = class AuthService {
                 Role: dto.Role
             }
         });
+        if (User.Role == 1) {
+            const OldCustomer = await this.prisma.customer.findUnique({
+                where: {
+                    UserId: User.Id
+                }
+            });
+            if (OldCustomer)
+                throw new common_1.BadRequestException('Данный UserId уже занят');
+            await this.prisma.customer.create({
+                data: {
+                    user: {
+                        connect: { Id: User.Id }
+                    },
+                    Name: dto.Name,
+                    PhoneNumber: dto.PhoneNumber,
+                    AvatarPath: dto.AvatarPath
+                }
+            });
+        }
+        else if (User.Role == 2) {
+            const OldHandyMan = await this.prisma.customer.findUnique({
+                where: {
+                    UserId: User.Id
+                }
+            });
+            if (OldHandyMan)
+                throw new common_1.BadRequestException('Данный UserId уже занят');
+            await this.prisma.handyMan.create({
+                data: {
+                    user: {
+                        connect: { Id: User.Id }
+                    },
+                    Name: dto.Name,
+                    PhoneNumber: dto.PhoneNumber,
+                    AvatarPath: dto.AvatarPath
+                }
+            });
+        }
         const tokens = await this.IssueTokens(User.Id);
         return {
             User: this.ReturnUserFields(User),
@@ -61,7 +99,7 @@ let AuthService = class AuthService {
     }
     async IssueTokens(userId) {
         const data = {
-            id: userId
+            Id: userId
         };
         const AcssesToken = this.jwt.sign(data, {
             expiresIn: '1h'

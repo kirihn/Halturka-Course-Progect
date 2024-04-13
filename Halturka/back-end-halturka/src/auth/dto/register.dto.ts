@@ -1,4 +1,5 @@
-import { IsEmail, IsNumber, IsNumberString, IsString, Max, Min, MinLength, isInt, min } from "class-validator";
+import { IsEmail, IsNumber, IsNumberString, IsOptional, IsString, Max, Min, MinLength, Validate, isInt, min } from "class-validator";
+import { PhoneValidator } from "../../validators/phone.validator"
 
 export class RegisterDto{
 
@@ -16,5 +17,14 @@ export class RegisterDto{
     @Max(2)
     Role: number
 
-    //@IsOptional
+    @IsString()
+    Name: string
+
+    @IsString()
+    @Validate(PhoneValidator, { message: 'Телефонный номер должен начинаться с +375 и иметь длину 13 символов' })
+    PhoneNumber: string
+    
+    @IsOptional()
+    @IsString()
+    AvatarPath: string
 }

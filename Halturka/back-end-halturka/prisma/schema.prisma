@@ -16,11 +16,11 @@ datasource db {
 
 
 model User {
-  Id Int @id @default(autoincrement()) // Prim
+  Id Int @id @default(autoincrement()) // Prim 
 
   Password String
   Email String @unique
-  Role Int
+  Role Int //1- Customer 2 - handyMan 3 - admin
 
   CreatedAt DateTime @default(now()) @map("Created_At")
 
@@ -145,14 +145,12 @@ model Feedback{
   Rating Int
 }
 
-
-
-
 enum EnumOrderStatus{
     PENDING
     ACCEPTED
     INPROCESS
     COMPLITED
+    REJECTED
 }
 
 

@@ -9,41 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RegisterDto = void 0;
+exports.UserDto = void 0;
 const class_validator_1 = require("class-validator");
 const phone_validator_1 = require("../../validators/phone.validator");
-class RegisterDto {
+class UserDto {
 }
-exports.RegisterDto = RegisterDto;
+exports.UserDto = UserDto;
 __decorate([
-    (0, class_validator_1.IsEmail)(),
-    __metadata("design:type", String)
-], RegisterDto.prototype, "Email", void 0);
-__decorate([
-    (0, class_validator_1.MinLength)(8, {
-        message: 'Пароль должен содержать минимум 8 символов'
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(1, {
+        message: 'Имя должно содержать хотя бы 1 символ'
     }),
-    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], RegisterDto.prototype, "Password", void 0);
-__decorate([
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.Min)(1),
-    (0, class_validator_1.Max)(2),
-    __metadata("design:type", Number)
-], RegisterDto.prototype, "Role", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], RegisterDto.prototype, "Name", void 0);
+], UserDto.prototype, "Name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Validate)(phone_validator_1.PhoneValidator, { message: 'Телефонный номер должен начинаться с +375 и иметь длину 13 символов' }),
     __metadata("design:type", String)
-], RegisterDto.prototype, "PhoneNumber", void 0);
+], UserDto.prototype, "PhoneNumber", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], RegisterDto.prototype, "AvatarPath", void 0);
-//# sourceMappingURL=register.dto.js.map
+], UserDto.prototype, "AvatarPath", void 0);
+//# sourceMappingURL=user.dto.js.map

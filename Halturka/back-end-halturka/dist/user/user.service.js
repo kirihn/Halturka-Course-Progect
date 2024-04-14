@@ -16,7 +16,7 @@ let UserService = class UserService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async ById(id) {
+    async ById(id, selectObject = {}) {
         const UserTable = await this.prisma.user.findUnique({
             where: {
                 Id: id
@@ -43,11 +43,44 @@ let UserService = class UserService {
                                 PhoneNumber: true,
                                 AvatarPath: true
                             }
-                        }
+                        },
+                        ...selectObject
                     }
                 });
             }
             case 2: {
+                anyUser = await this.prisma.user.findUnique({
+                    where: {
+                        Id: UserTable.Id
+                    },
+                    select: {
+                        Email: true,
+                        CreatedAt: true,
+                        handyMan: {
+                            select: {
+                                HandyManId: true,
+                                Name: true,
+                                PhoneNumber: true,
+                                AvatarPath: true,
+                                serviceHandyMans: {
+                                    select: {
+                                        service: {
+                                            select: {
+                                                ServiceName: true,
+                                                ServiceType: true,
+                                            }
+                                        },
+                                        Message: true,
+                                        Price: true,
+                                        TypePrice: true,
+                                        Images: true
+                                    }
+                                }
+                            }
+                        },
+                        ...selectObject
+                    }
+                });
             }
             case 3: {
             }

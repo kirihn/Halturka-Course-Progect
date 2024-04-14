@@ -68,7 +68,7 @@ export class AuthService {
                 }
             })
         }
-
+        
         const tokens = await this.IssueTokens(User.Id)
         return {
             User: this.ReturnUserFields(User),
